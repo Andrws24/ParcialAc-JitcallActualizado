@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Bienvenido, {{ userName || 'Usuario' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" [fullscreen]="true">
+  <ion-button expand="full" (click)="goToAddContact()">➕ Agregar Contacto</ion-button>
+
+  <ion-list *ngIf="contacts$ | async as contacts; else noContacts">
+    <ion-item *ngFor="let contact of contacts">
+      <ion-label>
+        <h2>{{ contact.name }}</h2>
+        <p>{{ contact.phone }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #noContacts>
+    <ion-item>
+      <ion-label>No tienes contactos aún.</ion-label>
+    </ion-item>
+  </ng-template>
+</ion-content>
